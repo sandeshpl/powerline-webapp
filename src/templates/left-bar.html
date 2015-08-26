@@ -1,0 +1,130 @@
+        
+
+            <div class="profilePic">
+
+                <img src="images/profilePic.png" alt="">
+
+                <i class="icon editIcon"></i>
+
+            </div>
+
+            <div class="profileTitle">Powerline</div>
+
+            <div class="profileDesc">
+
+                Powerline is the easiest way for leaders and communities to interact. Community engagement has never been more meaningful. 
+
+                
+
+            </div>
+
+            
+
+            <div class="aboutProfileDetail">
+
+                <ul>
+
+                    <li><i class="icon greyCalendarIcon"></i>Date Formed: 01/06/2015</li>
+
+                    <li><i class="icon memberIcon"></i>Members: 99</li>
+
+                </ul>
+
+            </div>
+
+            
+
+            <div class="userGroup" ng-if="homeCtrlParams.filter.groups.length">
+
+                <div class="titleText" >
+                    {{ items.groups.name }} 
+                    <a ng-click="navigate(items.groups)" >
+                        ({{homeCtrlParams.filter.groups.length}})
+                    </a>
+                </div>
+
+                <div class="userGroupDetail">
+
+                    <div class="profilPicList">
+
+                        <ul>
+
+                            <li ng-repeat="grp in homeCtrlParams.filter.groups">
+                                <a href="javascript:;" ng-click="navigateTo('group-profile', grp)">
+                                    <img ng-src="{{grp.avatar_file_path}}" alt="{{grp.official_title}}">
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            
+
+            <div class="userGroup" ng-if="homeCtrlParams.filter.myInfluences">
+
+            <div class="titleText" >
+                {{ items.influences.name }} 
+                <a ng-click="navigate(items.influences)" >
+                    ({{homeCtrlParams.filter.myInfluences.length}})
+                </a>
+            </div>
+
+                <div class="userInfluences">
+
+                    <div class="profilPicList">
+
+                        <ul>
+
+                            <li ng-repeat="item in homeCtrlParams.filter.myInfluences">
+                                <a href="javascript:;" ng-click="navigateTo('path', 'influence/profile', item.get('user').id)">
+                                    <img ng-src="{{ item.get('user').avatar_file_name }}" alt="">
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                    
+
+                </div>
+
+            </div>
+
+            
+
+            <div class="userGroup" ng-if="homeCtrlParams.filter.myRepresentatives.length">
+
+                <div class="titleText" >
+                    {{ items.representatives.name }} 
+                    <a ng-click="navigate(items.representatives)" >
+                        ({{homeCtrlParams.filter.myRepresentatives.length}})
+                    </a>
+                </div>
+
+                <div class="userInfluences">
+
+                    <div class="profilPicList">
+
+                        <ul>
+
+                            <li ng-repeat="representative in homeCtrlParams.filter.myRepresentatives.slice(0,4)" >
+                                <a href="javascript:;" ng-click="navigateToProfile(representative)">
+                                    <img ng-src="{{representative.avatar_file_path}}" alt="{{representative.first_name}}">
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                    
+
+                </div>
+
+            </div>

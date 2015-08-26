@@ -1,0 +1,272 @@
+ <div class="postFieldWrapper">
+
+             <div class="right selectPlace">
+
+                    
+                    
+                    <select 
+                        name="group"  
+                        dd-select="filter.groups" 
+                        icon="avatar_file_path" 
+                        acronym="acronym" 
+                        text="official_title" 
+                        value="id" 
+                        highlight="filter.selectedGroup" 
+                        click="filter.selectedGroup"
+                    ></select>
+
+                </div>
+
+                <div class="tabs left">
+
+                    <ul>
+
+                        <li class="active"><a ><i class="icon pencilIcon"></i> Most Recent</a></li>
+
+                        <li ><a ><i class="icon paperPenIcon"></i> Most Popular</a></li>
+
+                    </ul>
+
+                </div>
+
+                
+
+                <div class="clearfix"></div>
+
+                <!--<div class="newsFeedContainer">
+
+                
+
+                    <div class="newsFeedContent">
+
+                        <div class="newsFeedContentLeft left">
+
+                            <div class="newsFeedImage">
+
+                                <img src="images/newsProfileImg1.png" alt="">
+
+                            </div>
+
+                            <span class="userTitleName">Officer</span>
+
+                        </div>
+
+                        <div class="newsFeedText left">
+
+                            <div class="newsFeedName">
+
+                                <i class="icon chatIcon"></i> <a >Tony Stark</a> | New Leaders Council &#8226; 3 min
+
+                            </div>
+
+                            <div class="newsFeedTextContent">
+
+                                How can the university and the federal government make <a >#tuition</a> more affordable for 4-year degree students? <a >#FixHigherEd</a> (See video)
+
+                            </div>
+
+                            <div class="newsActionWrapper">
+
+                                <div class="left">
+
+                                    <span class="left">79 <i class="topTriangle"></i></span>
+
+                                    <span class="left">9 <i class="bottomTriangle"></i></span>
+
+                                    <span class="left"><i class="icon replyIcon"></i></span>
+
+                                    <span class="left"><i class="icon menuIcon"></i></span>
+
+                                </div>
+
+                                
+
+                                <div class="right">
+
+                                    <span class="left"><i class="icon commentIcon"></i> 12</span>
+
+                                    <span class="left"><i class="icon shareIcon"></i></span>
+
+                                    <span class="left"><i class="icon linkIcon"></i></span>
+
+                                </div>
+
+                                
+
+                                <div class="clearfix"></div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        
+
+                        <div class="newsCommentSection">
+
+                            <div class="replyMessageBox">
+
+                                <div class="newsFeedImage left">
+
+                                    <img src="images/messageProfileImg1.png" alt="">
+
+                                </div>
+
+                                <div class="replyMessageField right">
+
+                                    <textarea>@Tony Stark Maybe make the student loan more affordable instead?</textarea>
+
+                                    <span class="replyBoxRemainWord">199</span>
+
+                                </div>
+
+                                <div class="clearfix"></div>
+
+                            </div>
+
+                            
+
+                            <div class="usersReplyMessage">
+
+                                
+
+                                <div class="newsFeedContentLeft left">
+
+                                    <div class="newsFeedImage">
+
+                                        <img src="images/userProfileImg4.png" alt="">
+
+                                    </div>
+
+                                </div>
+
+                                <div class="newsFeedText left">
+
+                                    <div class="newsFeedName">
+
+                                        <a >Tony Stark</a> | New Leaders Council &#8226; 3 min
+
+                                    </div>
+
+                                    <div class="newsFeedTextContent">
+
+                                        I hope the government would consider this soon.
+
+                                    </div>
+
+                                    <div class="newsActionWrapper">
+
+                                        <div class="left">
+
+                                            <span class="left">79 <i class="bottomTriangleSmall"></i></span>
+
+                                            <span class="left">12 <i class="bottomTriangleSmall"></i></span>
+
+                                            
+
+                                        </div>
+
+
+
+                                        <div class="clearfix"></div>
+
+                                    </div>
+
+                                </div>
+
+                            <div class="clearfix"></div>    
+
+                                
+
+                            </div>
+
+                            
+
+                            <div class="usersReplyMessage">
+
+                                
+
+                                <div class="newsFeedContentLeft left">
+
+                                    <div class="newsFeedImage">
+
+                                        <img src="images/userProfileImg3.png" alt="">
+
+                                    </div>
+
+                                </div>
+
+                                <div class="newsFeedText left">
+
+                                    <div class="newsFeedName">
+
+                                        <a >Tony Stark</a> | New Leaders Council &#8226; 3 min
+
+                                    </div>
+
+                                    <div class="newsFeedTextContent">
+
+                                        They should make a comittee that offers financial assistance for qualified students and a variety of other tools that families can use to make higher education possible.
+
+                                    </div>
+
+                                    <div class="newsActionWrapper">
+
+                                        <div class="left">
+
+                                            <span class="left">79 <i class="bottomTriangleSmall"></i></span>
+
+                                            <span class="left">12 <i class="bottomTriangleSmall"></i></span>
+
+                                            
+
+                                        </div>
+
+
+
+                                        <div class="clearfix"></div>
+
+                                    </div>
+
+                                </div>
+
+                            <div class="clearfix"></div>    
+
+                                
+
+                            </div>
+
+                            
+
+                            <div class="viewMoreComment">
+
+                                <div class="viewMoreCommentLink left">View more comments <i class="fa fa-chevron-down"></i></div>
+
+                                <div class="viewMoreCommentText right">49 of 125</div>
+
+                                <div class="clearfix"></div>
+
+                            </div>
+
+                            
+
+                        </div>
+
+                        
+
+                    </div>
+
+                    
+
+                </div>-->
+
+                
+
+             </div>
+<div class="activities-list">
+    <div class="activity-margin" ng-repeat="activity in activities">
+       <i-activity  activity="activity" bindonce></i-activity>
+       <discussions ng-show="activity.toggleComments" id="activity.get('entity').id" entity="'poll'"></discussions> 
+    </div>
+</div>
