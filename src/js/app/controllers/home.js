@@ -50,7 +50,8 @@ angular.module('app.controllers').controller('home', function (
 
   function getActivities() {
     
-    $scope.activities = homeCtrlParams.filter.selectedGroup ? homeCtrlParams.filter.selectedGroup.activities
+    //console.log(homeCtrlParams.filter.selectedGroup);
+    $scope.activities = (homeCtrlParams.filter.selectedGroup && homeCtrlParams.filter.selectedGroup.id) ? homeCtrlParams.filter.selectedGroup.activities
       : activities.getFilteredModels();
   }
 
@@ -64,11 +65,56 @@ angular.module('app.controllers').controller('home', function (
     homeCtrlParams.loaded = true;
     activities.setDeferredRead().sort();
 
-    homeCtrlParams.filter.groups = groups.getGroupsOptions();
+    $scope.$watch(profile.get(), function () {
+      var currProfile = profile.get();
+      homeCtrlParams.leftBar.profileTitle = currProfile.full_name;
+      homeCtrlParams.leftBar.profilePic = currProfile.avatar_file_name;
+      homeCtrlParams.leftBar.profileDate = currProfile.birth;
+    });
+    
+    var displayGroups = groups.getGroupsOptions();
+    displayGroups.unshift({acronym:'All',avatar_file_path: "images/v2/icons/all-group.png",id:0});
+    
 
-    homeCtrlParams.filter.currGrp1 = homeCtrlParams.filter.groups[0];
+    _(displayGroups).each(function (group) {
+      group.unansweredCount = getUnansweredCount(group.activities);
+    });
 
-    homeCtrlParams.filter.currGrp2 = homeCtrlParams.filter.groups[0];
+    homeCtrlParams.filter.groups = displayGroups;
+
+    //console.log(displayGroups); debugger;
+    
+    var start = new Date();
+    var month = start.getMonth();
+    start.setDate(0);
+    petitions.loadByParams({user: session.user_id, start: start.toUTCString()}).then(function (collection) {
+      
+      _(homeCtrlParams.filter.groups).each(function (group) {
+        group.activities = activities.getFilteredModels(group);
+        //group.unansweredCount = getUnansweredCount(group.activities);
+        group.read = !_.some(group.activities, function (item) {
+          return !item.get('read');
+        });
+
+        group.available = group.petition_per_month - collection.reduce(function (memo, petition) {
+          if (petition.get('group').id === group.id && petition.get('created_at').getMonth() === month) {
+            memo++;
+          }
+          return memo;
+        }, 0);
+
+        if (homeCtrlParams.filter.selectedGroup && homeCtrlParams.filter.selectedGroup.id === group.id) {
+
+          homeCtrlParams.filter.selectedGroup = group;
+        }
+      });
+
+      //console.log(homeCtrlParams.filter.groups);
+
+
+    //homeCtrlParams.filter.currGrp1 = homeCtrlParams.filter.groups[0];
+
+    //homeCtrlParams.filter.currGrp2 = homeCtrlParams.filter.groups[0];
 
     /* recommendedGroups */
     if (!groups.getPopularGroups().length) {
@@ -114,32 +160,7 @@ angular.module('app.controllers').controller('home', function (
 
 
 
-    var start = new Date();
-    var month = start.getMonth();
-    start.setDate(0);
-    petitions.loadByParams({user: session.user_id, start: start.toUTCString()}).then(function (collection) {
-      
-      _(homeCtrlParams.filter.groups).each(function (group) {
-        group.activities = activities.getFilteredModels(group);
-        group.unansweredCount = getUnansweredCount(group.activities);
-        group.read = !_.some(group.activities, function (item) {
-          return !item.get('read');
-        });
-
-        group.available = group.petition_per_month - collection.reduce(function (memo, petition) {
-          if (petition.get('group').id === group.id && petition.get('created_at').getMonth() === month) {
-            memo++;
-          }
-          return memo;
-        }, 0);
-
-        if (homeCtrlParams.filter.selectedGroup && homeCtrlParams.filter.selectedGroup.id === group.id) {
-
-          homeCtrlParams.filter.selectedGroup = group;
-        }
-      });
-
-      //console.log(homeCtrlParams.filter.groups);
+    
     });
 
 
@@ -237,10 +258,12 @@ angular.module('app.controllers').controller('home', function (
       } else {
         $scope.alert(errorFormMessage($scope.petitionForm)[0], null, 'Error', 'OK');
       }
-    } else {
+    } else if(typeof homeCtrlParams.filter.selectedGroup2 == 'undefined'){
+        $scope.alert('No group selected', null, 'Error', 'OK');
+    }else{
       var formData = getFormData($scope.petitionForm, {
         group: ['group_id', function (group) {
-          return homeCtrlParams.filter.currGrp1.id;
+          return homeCtrlParams.filter.selectedGroup2.id;
         }],
         user_expire_interval: function (item) {
           return item.value;
@@ -396,12 +419,41 @@ angular.module('app.controllers').directive('iActivity', function($rootScope, qu
     },
     restrict: 'E',
     template: '<ng-include src="templateSrc"></ng-include>',
-    controller: function($scope) {
+    controller: function($scope,$compile,$timeout) {
       $scope.navigateTo = $rootScope.navigateTo;
       $scope.navigateToActivity = function(activity, focus) {
         activity.setRead();
         $rootScope.navigateTo('activity', activity, focus);
       };
+
+      $scope.toggleComments = function(activity,$event){
+        
+        var entity = activity.get('entity').type;
+        
+        if(entity != 'micro-petition'){
+          entity == 'poll';
+        }
+
+        var comments = "<discussions  id="+activity.get('entity').id+" entity=\"'poll'\"></discussions>";
+
+        $('.discussion-container').html('');
+        $('.activity-container').find('.reply').removeClass('discussion-open');
+
+        $($event.target).addClass('discussion-open');
+
+        angular.element($($event.target)
+          .parents('.activity-container')
+          .children('.discussion-container')
+        )
+          .html($compile(comments)($scope));
+      };
+
+      $scope.$on('discussion.comment-added', function () {
+        
+        $timeout(function(){
+          $('.activity-container').find('.discussion-open').click();
+        },10);
+      });
 
       $scope.title = $scope.activity.get('title');
       $scope.description = $scope.activity.get('description');

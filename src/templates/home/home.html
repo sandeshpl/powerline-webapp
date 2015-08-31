@@ -93,15 +93,16 @@
                 <div class="right">
 
                     <select 
-                        name="group"  
-                        dd-select="filter.groups" 
-                        icon="avatar_file_path" 
-                        acronym="acronym" 
-                        text="official_title" 
-                        value="id" 
-                        highlight="filter.currGrp1" 
-                        click="filter.currGrp1"
-                    ></select>
+            ng-if="filter.groups" 
+            name="group"  
+            dd-select="filter.groups" 
+            icon="avatar_file_path" 
+            acronym="acronym" 
+            text="official_title" 
+            value="id" 
+            highlight="filter.selectedGroup2" 
+            click="filter.selectedGroup2"
+        ></select>
                     
 
                 </div>
@@ -125,18 +126,18 @@
                     
 
                         
-                        <div class="title-field tabContainerField" ng-class="invalidClass(petitionForm.title.$invalid)">
+                        <div ng-show="data.type==petition_types[2]" class="title-field tabContainerField" ng-class="invalidClass(petitionForm.title.$invalid)">
 
-                            <input type="text" ng-model="data.title" name="title" maxlength="255" required placeholder="Type title here" />
+                            <input type="text" ng-model="data.title" name="title" maxlength="255" ng-required='data.type==petition_types[2]' placeholder="Type title here" />
 
                         </div>
 
                         <div class="tabContainerField">
 
-                            <textarea ng-model="data.petition_body" maxlength="2500" name="petition_body"
+                            <textarea ng-model="data.petition_body" maxlength="300" name="petition_body"
                                   required placeholder="Type your message here"
-                                  ng-init="data.chars_left = 2500"
-                                  ng-change="data.chars_left = 2500 - data.petition_body.length"></textarea>
+                                  ng-init="data.chars_left = 300"
+                                  ng-change="data.chars_left = 300 - data.petition_body.length"></textarea>
 
                             <span class="remainingWord" ng-bind="data.chars_left"></span>
                             
@@ -146,7 +147,7 @@
 
                         <div class="tabContainerField">
 
-                            <div ng-show="filter.currGrp1 && filter.currGrp1.available !== undefined" class="left remainingPetition">
+                            <div ng-show="filter.currGrp1.available" class="left remainingPetition">
                                 {{ filter.currGrp1.available }} petitions left in this group
                             </div>
 

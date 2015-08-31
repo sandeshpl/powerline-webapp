@@ -125,6 +125,7 @@ angular.module('app.controllers').controller('groups',function ($scope, groups, 
     return $scope.data && $scope.data.group_type === 0;
   };
 
+  /*
   $scope.invite = function () {
     $scope.confirmAction('Are you sure you want to invite all of your followers to join this group?').then(function () {
       var followers = influence.getFollowers().reduce(function (memo, item) {
@@ -132,6 +133,21 @@ angular.module('app.controllers').controller('groups',function ($scope, groups, 
         return memo;
       }, []);
       $scope.showPostWindow = false;
+      $scope.loading = true;
+      invites.invite(id, followers).finally(function () {
+        $scope.loading = false;
+        flurry.log('invite to group', {id: id});
+      });
+    });
+  };
+  */
+  function invite() {
+    $scope.confirmAction('Are you sure you want to invite all of your followers to join this group?').then(function () {
+      var followers = influence.getFollowers().reduce(function (memo, item) {
+        memo.push(item.follower.id);
+        return memo;
+      }, []);
+      //$scope.showPostWindow = false;
       $scope.loading = true;
       invites.invite(id, followers).finally(function () {
         $scope.loading = false;
@@ -170,7 +186,8 @@ angular.module('app.controllers').controller('groups',function ($scope, groups, 
         btnClass: 'btn-text',
         title: 'Invite',
         click: function () {
-          $scope.showPostWindow = !$scope.showPostWindow;
+          //$scope.showPostWindow = !$scope.showPostWindow;
+          invite();
           $scope.execApply();
         }
       });

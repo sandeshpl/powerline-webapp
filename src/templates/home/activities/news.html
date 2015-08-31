@@ -29,7 +29,7 @@
       {{ activity.get('rate_down') || 0}}
       <i class="activity-control down" ng-click="rate('down')"></i>
     </div>
-    <div class="control"><a ng-click="activity.toggleComments = !activity.toggleComments" class="activity-control reply"></a></div>
+    <div class="control"><a ng-click="toggleComments(activity,$event)" class="activity-control reply"></a></div>
     <div class="responses" bo-bind="responses_count"></div>
   </div>
 </article>

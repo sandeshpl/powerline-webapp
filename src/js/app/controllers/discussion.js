@@ -1,5 +1,6 @@
 angular.module('app.controllers').controller('discussion',function ($scope, topBar, discussion, $routeParams, $cacheFactory, flurry) {
 
+  /*
   var isWidget = !/^\/discussion/.test($scope.path());
   if (!isWidget) {
     topBar
@@ -8,6 +9,7 @@ angular.module('app.controllers').controller('discussion',function ($scope, topB
       .set('title', 'Discussion')
     ;
   }
+  */
 
   $scope.view = {};
   $scope.id = $scope.id || $routeParams.id;
@@ -38,9 +40,9 @@ angular.module('app.controllers').controller('discussion',function ($scope, topB
   });
 
   $scope.$on('discussion.comment-added', function () {
-    if (!isWidget) {
+    //if (!isWidget) {
       loadComments();
-    }
+    //}
   });
 
   $scope.loaded = function () {
@@ -113,5 +115,19 @@ angular.module('app.controllers').controller('discussion',function ($scope, topB
       $route.reload();
     }, $scope.loaded);
   };
-
+  $scope.rreply = function () {
+    if (!$scope.data.comment) {
+      return;
+    }
+    var data = {
+      parent_comment: $scope.comment.id,
+      comment_body: $scope.data.comment,
+      privacy: $scope.data.privacy
+    };
+    discussion.createComment($scope.entity, $scope.id, data).then(function () {
+      flurry.log('comment added', {id: $scope.id});
+      $scope.$emit('discussion.comment-added');
+      //$route.reload();
+    }, $scope.loaded);
+  };
 });

@@ -19,7 +19,10 @@
   </div>
   <div class="item-footer">
     <div class="control"><a ng-click="navigateToActivity(activity)">RSVP</a></div>
-    <div class="control"><a ng-click="activity.toggleComments = !activity.toggleComments" class="activity-control reply"></a></div>
+    <div class="control"><a ng-click="toggleComments(activity,$event)" class="activity-control reply"></a></div>
     <div class="responses" bo-bind="responses_count"></div>
+    <div class="control"><a ng-click="activity.toggleShare = !activity.toggleShare" class=""><i class="icon shareIcon"></i></a></div>
+    <!--<div class="control"><a class=""><i class="icon linkIcon"></i></a></div>-->
+    
   </div>
 </article>

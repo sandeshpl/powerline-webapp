@@ -1,4 +1,17 @@
-angular.module('app.controllers').controller('profile', function ($scope, topBar, profile, $window, layout, errorFormMessage, session, iStorage, flurry, homeCtrlParams, groups, formUtils) {
+angular.module('app.controllers').controller('profile', function (
+  $scope, 
+  topBar, 
+  profile, 
+  $window, 
+  layout, 
+  errorFormMessage, 
+  session, 
+  iStorage, 
+  flurry, 
+  homeCtrlParams, 
+  groups, 
+  formUtils
+  ) {
 
   $scope.view = {editMode: false};
 

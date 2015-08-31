@@ -121,5 +121,10 @@ angular.module('app.services', [
     selectedGroup: null,
     myRepresentatives : [],
     recommendedGroups : [],
+  },
+  leftBar:{
+    profilePic:'',
+    profileTitle:'',
+    profileDOB:''
   }
 });

@@ -433,7 +433,9 @@ asterisk{color:#c1353c;position:relative;}
 .activities-list .item .item-footer .control{line-height:40px;min-width:50px;text-align:center;font-size:13px;}.activities-list .item .item-footer .control a{font-size:13px;font-family:'Lato Bold';text-transform:uppercase;}
 .activities-list .item>figure{display:block;position:absolute;top:21px;left:16px;}.activities-list .item>figure img{display:block;width:33px;border-radius:3px;}
 .activities-list .item>figure span{display:block;width:10px;height:10px;margin:5px auto;background-color:#ef2517;border-radius:100%;}
-.sa-items .item{padding:15px 0 12px 0;display:flex;flex-direction:row;border-bottom:solid 1px #ededed;}.sa-items .item.item-link{padding-right:40px;background:url("../images/v2/cut/sa-right-icon.png") right 23px no-repeat;background-size:18px 14px;}
+.sa-items .item{padding:15px 0 12px 0;display:flex;flex-direction:row;border-bottom:solid 1px #ededed;}
+.sa-items .item.item-link{padding-right:40px;cursor: pointer;background-size:18px 14px;}
+.sa-items .item.item-link:hover{background-color: #eee;}
 .sa-items .item .avatar{order:1;padding:0 8px;min-width:49px;text-align:center;box-sizing:border-box;}
 .sa-items .item .avatar figure{overflow:hidden;display:inline-block;width:33px;height:33px;border-radius:4px;cursor: pointer;}
 .sa-items .item .avatar figure img{width:33px;}

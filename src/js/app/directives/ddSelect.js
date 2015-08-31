@@ -8,7 +8,8 @@ return {
     icon:"@icon",
     highlight: "=?highlight",
     click: "=?click",
-    id: "@id"
+    id: "@id",
+    count:"@count" 
   },
 
   link: function (scope, element) {
@@ -29,9 +30,14 @@ return {
       element.empty();
       angular.forEach(scope.values, function(item) {
 
-        item[scope.text] = item[scope.acronym] || item[scope.text];
-
-        element.append($("<option data-imagesrc='"+item[scope.icon]+"' value='" + item[scope.value] + "'>" + item[scope.text] +"</option>"));
+        var optTxt = item[scope.acronym] || item[scope.text];
+        var optVal = item[scope.value];
+        var optCount = item[scope.count] || 0;
+        var optIcon = item[scope.icon];
+        //console.log(optCount);
+        var opt = "<option data-description='"+optCount+"' data-imagesrc='"+optIcon+"' value='"+optVal+"'>"+optTxt+"</option>";
+        
+        element.append($(opt));
       });
     };
 

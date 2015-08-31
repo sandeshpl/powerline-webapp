@@ -22,7 +22,7 @@
       <spinner></spinner>
     </div>
     <div class="control" ng-show="answerAction && !sending"><a ng-click="answer()">{{ answerAction }}</a></div>
-    <div class="control"><a ng-click="activity.toggleComments = !activity.toggleComments" class="activity-control reply"></a></div>
+    <div class="control"><a ng-click="toggleComments(activity,$event)" class="activity-control reply"></a></div>
     <div class="responses" bo-bind="responses_count"></div>
   </div>
 </article>

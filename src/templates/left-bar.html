@@ -2,13 +2,13 @@
 
             <div class="profilePic">
 
-                <img src="images/profilePic.png" alt="">
+                <img ng-src="{{homeCtrlParams.leftBar.profilePic}}" alt="">
 
                 <i class="icon editIcon"></i>
 
             </div>
 
-            <div class="profileTitle">Powerline</div>
+            <div class="profileTitle">{{homeCtrlParams.leftBar.profileTitle}}</div>
 
             <div class="profileDesc">
 
@@ -24,7 +24,9 @@
 
                 <ul>
 
-                    <li><i class="icon greyCalendarIcon"></i>Date Formed: 01/06/2015</li>
+                    <!--<li ng-if="homeCtrlParams.leftBar.profileDate"><i class="icon greyCalendarIcon"></i>Date Formed: {{homeCtrlParams.leftBar.profileDate}}</li>-->
+
+                    <li ng-if="homeCtrlParams.leftBar.profileDate"><i class="icon greyCalendarIcon"></i>Date of Birth: {{homeCtrlParams.leftBar.profileDate}}</li>
 
                     <li><i class="icon memberIcon"></i>Members: 99</li>
 
@@ -49,7 +51,7 @@
 
                         <ul>
 
-                            <li ng-repeat="grp in homeCtrlParams.filter.groups">
+                            <li ng-repeat="grp in homeCtrlParams.filter.groups" ng-if="grp.id">
                                 <a href="javascript:;" ng-click="navigateTo('group-profile', grp)">
                                     <img ng-src="{{grp.avatar_file_path}}" alt="{{grp.official_title}}">
                                 </a>

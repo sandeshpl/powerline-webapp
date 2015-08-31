@@ -1,5 +1,5 @@
 <section ng-controller="discussion">
-    <form class="comment-answer-form" ng-controller="discussion.comment-form" ng-submit="reply()">
+    <form class="comment-answer-form" ng-controller="discussion.comment-form" ng-submit="rreply()">
         <div class="checkbox-privacy" ng-class="{checked: data.privacy}" ng-click="data.privacy = data.privacy ? 0 : 1" guide="privacy-option">
             <i></i>
         </div>
@@ -11,7 +11,7 @@
             <button class="btn-input-send" type="submit" ng-click></button>
         </div>
     </form>
-    <section ng-init="commentsLimit=10">
+    <section ng-init="commentsLimit=2">
         <div class="comments">
             <div class="item" ng-repeat="comment in comment.children | limitTo:commentsLimit" bindonce>
                 <div class="wrap">
@@ -19,9 +19,9 @@
                         <img bo-src="comment.author_picture" width="35">
                     </figure>
                     <div class="header">
-                        <strong
+                        <strong><a href="javascript:;"
                                 bo-bind="comment.user.full_name"
-                                ng-click="navigateTo('owner-profile', comment.user)"></strong>
+                                ng-click="navigateTo('owner-profile', comment.user)"></a></strong>
                         <br>
                         <time ng-bind="(comment.created_at | elapsed)"></time>
                         <div class="comment-controls">
@@ -66,7 +66,12 @@
                 </div>
             </div>
         </div>
-        <button class="btn-large btn-primary margin-10" ng-click="commentsLimit=comment.children.length" ng-show="comment.children.length > commentsLimit">See More</button><br>
+        <div ng-click="commentsLimit=comment.children.length" ng-show="comment.children.length > commentsLimit" class="viewMoreComment">
+            <div class="viewMoreCommentLink left">View more comments <i class="fa fa-chevron-down"></i></div>
+            <div class="viewMoreCommentText right">49 of 125</div>
+            <div class="clearfix"></div>
+        </div>
+        <!--<button class="btn-large btn-primary margin-10" ng-click="commentsLimit=comment.children.length" ng-show="comment.children.length > commentsLimit">See More</button><br>-->
     </section>
 
     <div class="wrap-center wrap-dark" ng-show="loading"><spinner></spinner></div>
